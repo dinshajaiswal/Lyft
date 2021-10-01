@@ -1,53 +1,26 @@
 import React, { useState } from "react";
-import List from "./List";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import { Route, Switch , Redirect} from "react-router-dom";
 
-const App=()=>{
+import Newsec from "./Newsec";
+import Navbar from "./Navbar";
+import Details from "./Details";
+import Sec3 from "./Sec3"
+import Footer from "./Footer";
+import Sec4 from "./Sec4";
 
-const [inputList,setInputlist]= useState("");
-const [items,setItems]=useState([]);
 
-const itemEvents=(event)=>{
-    setInputlist(event.target.value);
+const App = () => {
+  return (
+    <>
+      <Navbar/>
+      <Newsec/>
+  
+      <Sec3/>
+      <Sec4/>
+      <Footer/>
+    </>
+  );
 };
-
-const listOfItems=()=>{
-     setItems((olditems)=>{
-         return[...olditems, inputList]
-     });
-     setInputlist("");
-}
-
-const deleteItems=(id)=>{
-    setItems((olditems)=>{
-        return olditems.filter((arrEle,index)=>{
-              return index!==id;
-        })
-    })
-}
-
-    return(
-        <>
-        <div className="main_div">
-        <div className="center_div">
-        <br />
-            <h1>ToDo List</h1>
-         <br />
-        <input type="text" placeholder="Add Items" onChange={itemEvents}  value={inputList} />
-        <button onClick={listOfItems}>+</button>
-        <ol>
-            {/* <li>{inputList}</li> */}
-           { items.map( (itemsval, index)=>{
-              return  <List text={itemsval}
-                  key={index}
-                  id={index}
-                  onSelect={deleteItems}
-              />
-            } )}
-        </ol>
-        </div>
-
-        </div>
-        </>
-    );
-}
 export default App;
